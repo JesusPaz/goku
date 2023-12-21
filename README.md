@@ -1,6 +1,6 @@
 # Goku
 
-Welcome to the Goku repository. This project is a web application built with HTML, HTMX, and CSS.
+Welcome to the Goku repository. This project is a web application built with HTML, HTMX, JS, and CSS.
 
 ## Purpose
 
@@ -10,6 +10,7 @@ The purpose of this project is to provide a unique and interactive experience fo
 
 - **HTML**: Used for structuring the web content.
 - **HTMX**: Allows access to AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes, so you can build modern user interfaces with the simplicity and power of hypertext.
+- **JavaScript**: Used for dynamic interactions and manipulating the DOM.
 - **CSS**: Used for styling the web content.
 
 ## Deployment
