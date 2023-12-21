@@ -1,19 +1,101 @@
 <div class="slide" id="slide6">
-    <h2 id="revealText"></h2>
+    <div class="text-container">
+        <h2 id="revealText"></h2>
+    </div>
+    <div id="namesContainer" class="names-container" style="display:none;">
+        <div class="name-cards-container">
+            <div class="name-card fadeIn boy" id="babyNameCard">
+                <h3>Goku Silvano Paz Cuenca</h3>
+                <div class="emoji">👶</div>
+            </div>
+            <div class="name-card fadeIn girl" id="babyGirlNameCard">
+                <h3>Yazury Xilófono Paz Cuenca</h3>
+                <div class="emoji">👧</div>
+            </div>
+        </div>
+    </div>
+    <p id="weekCounter" class="week-counter fadeIn" style="display:none;">
+        Tiempo transcurrido: <span id="weekNumber"></span>
+    </p>
 </div>
 
 <style>
-    .word {
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+    }
+
+    .slide {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px;
+        text-align: left;
+    }
+
+    .text-container {
+        margin-bottom: 30px;
+    }
+
+    .names-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .name-card {
+        background: #e9e9e9;
+        margin: 0 2px;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeIn 3s ease forwards;
+        animation-delay: 2s;
+        text-align: center;
+    }
+
+    .emoji {
+        font-size: 24px;
+    }
+
+    .week-counter {
+        margin-top: 30px;
+        opacity: 0;
+        background: #e9e9e9;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .word,
+    .fadeIn {
         opacity: 0;
         animation: fadeIn 0.5s forwards;
     }
 
+    .name-cards-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .name-card.boy {
+        background-color: #add8e6;
+    }
+
+    .name-card.girl {
+        background-color: #ffb6c1;
+    }
+
     @keyframes fadeIn {
-        from {
+        0% {
             opacity: 0;
         }
 
-        to {
+        100% {
             opacity: 1;
         }
     }
@@ -21,12 +103,11 @@
 
 <script>
     var revealText = document.getElementById('revealText');
-    var phrases = [
-        'Estamos muy felices de conocerlos,',
-        'y que sean parte de nuestra familia.',
-        'Esto es algo que nos va a unir más.',
-        'Alguien nuevo va a llegar a la familia...'
-    ];
+    var namesContainer = document.getElementById('namesContainer');
+    var weekCounter = document.getElementById('weekCounter');
+    var weekNumber = document.getElementById('weekNumber');
+    var startDate = new Date('2023-11-02');
+    var phrases = ['Una nueva aventura está por comenzar,', 'un pequeño misterio se va desvelando.', 'Corazones llenos de amor esperan con ilusión,', 'pronto, muy pronto, una sorpresa...', '¡Un nuevo miembro llegará a la familia!'];
     var currentPhrase = 0;
     var currentWord = 0;
 
@@ -39,12 +120,40 @@
                 wordSpan.textContent = words[currentWord] + ' ';
                 revealText.appendChild(wordSpan);
                 currentWord++;
-                setTimeout(showNextWord, 300);
+                setTimeout(showNextWord, 500); //500
             } else {
                 currentPhrase++;
                 currentWord = 0;
-                setTimeout(showNextWord, 2000);
+                if (currentPhrase < phrases.length) {
+                    setTimeout(showNextWord, 3000); //3000
+                } else {
+                    revealNamesAndWeeks();
+                }
             }
+        }
+    }
+
+    function revealNamesAndWeeks() {
+        namesContainer.style.display = 'block';
+        namesContainer.classList.add('fadeIn');
+        weekCounter.style.display = 'block';
+        weekCounter.classList.add('fadeIn');
+        document.getElementById('babyNameCard').classList.add('fadeIn');
+        document.getElementById('babyGirlNameCard').classList.add('fadeIn');
+        calculateWeeks();
+    }
+
+    function calculateWeeks() {
+        var today = new Date();
+        var diffInTime = today.getTime() - startDate.getTime();
+        var diffInDays = diffInTime / (1000 * 3600 * 24);
+        var weeks = Math.floor(diffInDays / 7);
+        var days = Math.floor(diffInDays % 7);
+
+        if (days === 0) {
+            weekNumber.textContent = weeks + ' semanas';
+        } else {
+            weekNumber.textContent = weeks + ' semanas y ' + days + ' días';
         }
     }
 
