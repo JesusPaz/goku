@@ -1,0 +1,64 @@
+<div class="slide" id="slide5">
+    <h2>Estás muy cerca, pero para saber que eres un humano, por favor resuelve estos problemas:</h2>
+    <div id="problems"></div>
+    <button id="bypassButton" hx-get="slides/slide6.html" hx-swap="outerHTML" hx-target="#slide5">Está bien, no soy un
+        robot. Por favor, continúa.</button>
+
+</div>
+
+<script>
+    var problems = [
+        { question: '¿Cuánto es 1 + 1?', answer: '2' },
+        { question: '¿Cuánto es 2 * 2?', answer: '4' },
+        { question: '¿Cuánto es 5 - 2?', answer: '3' },
+        { question: '¿Cuánto es 2 * 3?', answer: '6' },
+        { question: '¿Cuánto es 10 / 2?', answer: '5' },
+        { question: '¿Cuánto es 5 * 5?', answer: '25' },
+        { question: '¿Cuánto es 10 * 10?', answer: '100' },
+        { question: '¿Cuánto es 50 / 5?', answer: '10' },
+        { question: '¿Cuánto es 100 - 25?', answer: '75' },
+        { question: '¿Cuánto es 20 + 30?', answer: '50' },
+        { question: '¿Cuánto es 200 * 3?', answer: '600' },
+        { question: '¿Cuánto es 1000 / 2?', answer: '500' },
+        { question: '¿Cuánto es 500 - 125?', answer: '375' },
+        { question: '¿Cuánto es 300 + 700?', answer: '1000' },
+        { question: '¿Cuánto es 2000 * 3?', answer: '6000' },
+        { question: '¿Cuánto es 5000 / 5?', answer: '1000' },
+        { question: '¿Cuánto es 10000 - 2500?', answer: '7500' },
+        { question: '¿Cuánto es 5000 + 5000?', answer: '10000' },
+        { question: '¿Cuánto es 10000 * 2?', answer: '20000' },
+        { question: '¿Cuánto es 50000 / 10?', answer: '5000' },
+    ];
+
+    var problemsDiv = document.getElementById('problems');
+    var revealButton = document.getElementById('revealButton');
+
+    problems.forEach(function (problem, index) {
+        var problemElement = document.createElement('div');
+        problemElement.innerHTML = `
+            <p>${problem.question}</p>
+            <input id="problem${index}" type="number">
+        `;
+        problemsDiv.appendChild(problemElement);
+
+        var problemInput = document.getElementById('problem' + index);
+        problemInput.addEventListener('input', function () {
+            if (problemInput.value == problem.answer) {
+                if (index < problems.length - 1) {
+                    document.getElementById('problem' + (index + 1)).disabled = false;
+                } else {
+                    revealButton.disabled = false;
+                }
+            } else {
+                if (index < problems.length - 1) {
+                    document.getElementById('problem' + (index + 1)).disabled = true;
+                }
+                revealButton.disabled = true;
+            }
+        });
+
+        if (index > 0) {
+            problemInput.disabled = true;
+        }
+    });
+</script>

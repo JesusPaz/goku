@@ -1,0 +1,23 @@
+<div class="slide" id="slide4">
+    <h2>La revelación será en:</h2>
+    <div id="countdown" style="font-size: 3em; color: #007bff;">10</div>
+    <button id="revealButton" hx-get="slides/slide5.html" hx-swap="outerHTML" hx-target="#slide4" disabled>Espera un
+        momento</button>
+</div>
+
+<script>
+    var countdownElement = document.getElementById('countdown');
+    var revealButton = document.getElementById('revealButton');
+    var countdown = 1;
+
+    var countdownInterval = setInterval(function () {
+        countdown--;
+        countdownElement.textContent = countdown;
+
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
+            revealButton.disabled = false;
+            revealButton.textContent = '¡Revelar ahora!';
+        }
+    }, 1000);
+</script>

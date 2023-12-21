@@ -1,0 +1,26 @@
+<div class="slide" id="slide2">
+    <h2>¿Cuál creen que es nuestra gran noticia?</h2>
+    <form id="guessForm">
+        <label>
+            <input type="radio" name="guess" value="marriage">
+            Nos vamos a casar
+        </label>
+        <label>
+            <input type="radio" name="guess" value="apartment">
+            Compramos un apartamento
+        </label>
+        <label>
+            <input type="radio" name="guess" value="car">
+            Compramos un carro
+        </label>
+        <label>
+            <input type="radio" name="guess" value="cat">
+            Adoptamos un nuevo gato
+        </label>
+        <label>
+            <input type="radio" name="guess" value="baby">
+            Nos vamos del país
+        </label>
+        <button hx-get="slides/slide3.html" hx-swap="outerHTML" hx-target="#slide2">Enviar</button>
+    </form>
+</div>
